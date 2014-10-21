@@ -77,6 +77,14 @@
 #define TRUE    1
 #define FALSE   0
 
+/*Campos*/
+union parse_CANTX
+{
+    double frame[2];
+    unsigned char dadosCAN[8];
+
+}TxCANParse;
+
 
 /*********************************************************************
 *
@@ -88,7 +96,7 @@ void InitECAN(void);
 
 unsigned char ECAN_Receive(void);
 
-void ECAN_Transmit(double, int, int, int);
+void ECAN_Transmit(double,double, int, int, int);
 char temp_D0;
 
 #endif

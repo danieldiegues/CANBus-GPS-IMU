@@ -302,26 +302,29 @@ unsigned char ECAN_Receive(void)
 *                      Transmit Sample Mesage
 *
 *********************************************************************/
-void ECAN_Transmit(double data, int dLc, int sIDh0, int sIDl0 )
+void ECAN_Transmit(double data0,double data1, int dLc, int sIDh0, int sIDl0 )
 //data to send; ID standard high zero, ID ...low...,length of data in bytes
 {
+    TxCANParse.frame[0] = data0;
+    TxCANParse.frame[1] = data1;
+
+
     TXB0EIDH = 0x00;
     TXB0EIDL = 0x00;
 
-    //0x35E    0110 1011 110
     TXB0SIDH = sIDh0;//0x32;
     TXB0SIDL = sIDl0;// 0xC0;
 
     TXB0DLC = dLc;
 
-    TXB0D0 = 0;
-    TXB0D1 = 0;//0xCC;
-    TXB0D2 = 0;
-    TXB0D3 = 0;
-    TXB0D4 = 0;//0xCC;
-    TXB0D5 = 0;
-    TXB0D6 = 0;
-    TXB0D7 = 0;//0xCC;
+    TXB0D0 = TxCANParse.dadosCAN[0];
+    TXB0D1 = TxCANParse.dadosCAN[1];//0xCC;
+    TXB0D2 = TxCANParse.dadosCAN[2];
+    TXB0D3 = TxCANParse.dadosCAN[3];
+    TXB0D4 = TxCANParse.dadosCAN[4];//0xCC;
+    TXB0D5 = TxCANParse.dadosCAN[5];
+    TXB0D6 = TxCANParse.dadosCAN[6];
+    TXB0D7 = TxCANParse.dadosCAN[7];//0xCC;
 
 
 //

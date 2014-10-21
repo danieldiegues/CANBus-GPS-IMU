@@ -82,67 +82,69 @@ struct flag_Bits
 
 }flagBits;
 
-union parse_CANTXRX
-{
-    double frame[2];
-    unsigned char dadosCAN[8];
 
-}TxCANRxParse;
-
-union parse_CANTXRX1
-{
-    double frame[2];
-    unsigned char dadosCAN[8];
-
-}TxCANRxParse1;
-
-//typedef	struct reg_GPS{
-//				volatile unsigned char bufferGGA[70];
-//				volatile unsigned char bufferGSA[70];
-//				volatile unsigned char bufferGSV[70];
-//				volatile unsigned char bufferRMC[70];
-//				volatile unsigned char bufferVTG[70];
+//DEBUG UNION
+//union parse_CANTXRX
+//{
+//    double frame[2];
+//    unsigned char dadosCAN[8];
 //
-//				volatile unsigned char bufferRxTemp[70];
+//}TxCANRxParse;
 //
-//				unsigned int index;
+//union parse_CANTXRX1
+//{
+//    double frame[2];
+//    unsigned char dadosCAN[8];
 //
-//		}GPSregister;
+//}TxCANRxParse1;
 //
-//
-//
-//
-//	GPSregister gpsreg;
-//
-//
-//
-//        int get_message(char charRx,GPSregister *gpsReg)
-//	{
-//		    if(temp!='*')         				//not final of the message
-//            {
-//                gpsReg->bufferRxTemp = charRx;  //save Rx data initial of string
-//                indexRx++;
-//                return 0;
-//            }
-//            else
-//            {
-//                bufferRxTemp[indexRx] = temp;   //put terminator in the end of message
-//
-//                if(!strncmp(bufferRxTemp,"$GPGGA",6))
-//                   strncpy(bufferGGA, bufferRxTemp,(indexRx+1));
-//                if(!strncmp(bufferRxTemp,"$GPGSA",6))
-//                   strncpy(bufferGSA, bufferRxTemp,(indexRx+1));
-//                if(!strncmp(bufferRxTemp,"$GPGSV",6))
-//                   strncpy(bufferGSV, bufferRxTemp,(indexRx+1));
-//                if(!strncmp(bufferRxTemp,"$GPRMC",6))
-//                   strncpy(bufferRMC, bufferRxTemp,(indexRx+1));
-//                if(!strncmp(bufferRxTemp,"$GPVTG",6))
-//                   strncpy(bufferVTG, bufferRxTemp,(indexRx+1));
-//				indexRx = 0;
-//                return 1;
-//
-//            }
-//	}
+////typedef	struct reg_GPS{
+////				volatile unsigned char bufferGGA[70];
+////				volatile unsigned char bufferGSA[70];
+////				volatile unsigned char bufferGSV[70];
+////				volatile unsigned char bufferRMC[70];
+////				volatile unsigned char bufferVTG[70];
+////
+////				volatile unsigned char bufferRxTemp[70];
+////
+////				unsigned int index;
+////
+////		}GPSregister;
+////
+////
+////
+////
+////	GPSregister gpsreg;
+////
+////
+////
+////        int get_message(char charRx,GPSregister *gpsReg)
+////	{
+////		    if(temp!='*')         				//not final of the message
+////            {
+////                gpsReg->bufferRxTemp = charRx;  //save Rx data initial of string
+////                indexRx++;
+////                return 0;
+////            }
+////            else
+////            {
+////                bufferRxTemp[indexRx] = temp;   //put terminator in the end of message
+////
+////                if(!strncmp(bufferRxTemp,"$GPGGA",6))
+////                   strncpy(bufferGGA, bufferRxTemp,(indexRx+1));
+////                if(!strncmp(bufferRxTemp,"$GPGSA",6))
+////                   strncpy(bufferGSA, bufferRxTemp,(indexRx+1));
+////                if(!strncmp(bufferRxTemp,"$GPGSV",6))
+////                   strncpy(bufferGSV, bufferRxTemp,(indexRx+1));
+////                if(!strncmp(bufferRxTemp,"$GPRMC",6))
+////                   strncpy(bufferRMC, bufferRxTemp,(indexRx+1));
+////                if(!strncmp(bufferRxTemp,"$GPVTG",6))
+////                   strncpy(bufferVTG, bufferRxTemp,(indexRx+1));
+////				indexRx = 0;
+////                return 1;
+////
+////            }
+////	}
 
 
 unsigned int matchStd = 0;    
@@ -208,8 +210,7 @@ unsigned char mensagem[30] = "OLA MUNDO\n\r";
 char mensagem1[50];
 char mensagem2[20] = "ok\n\r";
 unsigned char mensagem3[5];
-unsigned int heartbeatCount;
-unsigned char buttonWasPressed;
+
 
 GPSregister gpsReg;
 GPSutc gpsUTC;
@@ -224,22 +225,8 @@ int cnt = 0;
 // Protótipo da Funções (Cabeçalho)
 
 void ConfigPIC(void);
-void InitializeADC(void);
-int getADC(char);
-void InitializeLCD(void);
-void DelayFor18TCY(void);
-void DelayPORXLCD(void);
-void DelayXLCD(void);
+
 void InitializeUSART(void);
-void InitializePWM(void);
-void InitializeTIMER(void);
-void InitializeSPI(void);
-void CalcCtrl(void);
-
-
-unsigned char ButtonPressed(void);
-void Delay(unsigned int count);
-void Heartbeat(void);
 
 
 void USART_putc(unsigned char c)
@@ -563,13 +550,17 @@ void main() {
     //InitializeADC();
     //InitializePWM();
     //InitializeTIMER();
-    TxCANRxParse.frame[0] = -12.3456789;
-    TxCANRxParse.frame[1] = -98.7654321;
-    int i;
-    for(i=0;i < 8;i++)
-    {
-        TxCANRxParse1.dadosCAN[i] = TxCANRxParse.dadosCAN[i];
-    }
+
+
+//DEBUG UNION
+//    TxCANRxParse.frame[0] = -12.3456789;
+//    TxCANRxParse.frame[1] = -98.7654321;
+//    int i;
+//    for(i=0;i < 8;i++)
+//    {
+//        TxCANRxParse1.dadosCAN[i] = TxCANRxParse.dadosCAN[i];
+//    }
+//
 
 
 
@@ -582,7 +573,7 @@ void main() {
     initGPS(&gpsReg);
     InitializeUSART();
     //InitializeSPI();
-   // InitECAN();
+    InitECAN();
     sprintf(mensagem1,"Ola\n\r");
    // sprintf(mensagem2,"1234.5678");
     float val = 0 ;
@@ -610,14 +601,19 @@ void main() {
                 putsUSART(gpsReg.bufferVTG);
                     putsUSART(mensagem1);
                 
-                sprintf(mensagem1,"UTC:%f\n\rLat:%x\n\rLong:%x\n\r",gpsUTC.utc_ts,gpsPos.pos_lat,gpsPos.pos_lon);
+                sprintf(mensagem1,"UTC:%f.\n\rLat:%x\n\rLong:%x\n\r",gpsUTC.utc_ts,gpsPos.pos_lat,gpsPos.pos_lon);
                 putsUSART(mensagem1);
-                sprintf(mensagem1,"Saida1:%f\n\rSaida2:%f\n\r",TxCANRxParse1.frame[0],TxCANRxParse1.frame[1]);
-                putsUSART(mensagem1);
+//                sprintf(mensagem1,"Saida1:%f\n\rSaida2:%f\n\r",TxCANRxParse1.frame[0],TxCANRxParse1.frame[1]);
+//               putsUSART(mensagem1);
+
+                ECAN_Transmit(gpsUTC.utc_ts,gpsPos.pos_lat,4,0x50,0x80);
+
                 flagBits.flagRxNew = 0;
+
+
      }
 
-   //  ECAN_Transmit(gpsUTC.utc_ts,4,0x50,0x80);
+     
 
 //ECAN_Transmit();
 
@@ -959,8 +955,7 @@ void ConfigPIC(void) {
 
     //OSCTUNE = 0x2F;
     // Initialize global variables to 0
-    heartbeatCount = 0;
-    buttonWasPressed = 0;
+  
 
     // Initialize I/O to be digital, with PORTD (LEDs) as outputs and PORTB as inputs (pushbutton)
     ADCON0 = ADCON1 = 0x00; //PARA USAR PORTB COMO I/O PABDEN = 1
